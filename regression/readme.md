@@ -1,0 +1,3 @@
+- Finished wrangle.py work code in wrangle.py
+- Need to prettify
+- 
