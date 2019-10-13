@@ -1,4 +1,9 @@
-plot_residuals(x, y, dataframe)
+# function takes in the feature, target, data_source to generate residual plot using sns
+def plot_residuals(x, y, df):
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    sns.residplot(x, y, data = df, color = "darkgreen")
+plot_residuals(tip.total_bill, tip.tip, tip)
 
 
 def regression_errors(x, y, df):
