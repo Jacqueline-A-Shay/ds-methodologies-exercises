@@ -59,6 +59,19 @@ def better_than_baseline(x,y):
         False
 better_than_baseline(regression_errors(tip.total_bill, tip.tip, tip),baseline_mean_errors(tip.tip, tip))
 
+def model_significance(x,y,df):
+    from statsmodels.formula.api import ols
+    x = tip.total_bill
+    y = tip.tip
+    # fit linear model
+    linear = ols('y~x', data = df).fit()
+    r2 = linear.rsquared
+    print('R-squared = ', round(r2,3))
+    f_pval = linear.f_pvalue
+
+    print("p-value for model significance = ", round(f_pval))
+    return linear.summary()
+model_significance(tip.total_bill, tip.tip, tip)
 
 
 # def regression_errors(x, y, df):
@@ -103,6 +116,17 @@ better_than_baseline(regression_errors(tip.total_bill, tip.tip, tip),baseline_me
    
 #     print("SSE: ", SSE, "MSE: ", MSE, "RMSE: ", RMSE)
 #     print("SSE_base: ", SSE_baseline, "MSE_base: ", MSE_baseline, "RMSE_base: ", RMSE_baseline)
+    # plt.figure(figsize=(8, 5))
+    # ## plot data points, regression line and baseline
+    # # plot the data points 
+    # plt.scatter(x, y, color='dimgray', s=40)
+    # # plot the regression line
+    # plt.plot(x, df["yhat"], color='darkseagreen', linewidth=3)
+    # # baseline
+    # plt.plot(x, df_baseline['yhat'], color='darkorange', linewidth=3)
+    # plt.xlabel("total_bill")
+    # plt.ylabel("tip")
     
-#     return df_eval, SSE, MSE, RMSE #ESS, TSS
+#     return df_eval, SSE, MSE, RMSE, ESS, TSS
+
 #regression_errors(tip.total_bill, tip.tip, tip)
