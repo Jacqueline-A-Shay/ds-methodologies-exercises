@@ -18,7 +18,7 @@ y = pd.DataFrame(df.total_charges)
 def split_my_data(df):
 	train, test = train_test_split(df, train_size = 0.8, random_state = 123)
 	return train, test
-split_my_data(df)
+# split_my_data(df)
 
 # standard
 def perform_standard_scaler(train, test):
@@ -27,20 +27,18 @@ def perform_standard_scaler(train, test):
 	train_scaled = pd.DataFrame(scaler.transform(train), columns=train.columns.values).set_index([train.index.values])
 	test_scaled = pd.DataFrame(scaler.transform(test), columns=test.columns.values).set_index([test.index.values])
 	return scaler, train_scaled, test_scaled
-	#return (X_std_scaler, y_std_scaler, X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled)
 
 
-def split_scale():
-	a, b, c, d = obtain_data()
-	return perform_standard_scaler(a, b, c, d)
+# def split_scale():
+# 	a, b, c, d = obtain_data()
+# 	return perform_standard_scaler(a, b, c, d)
 
 # uniform
 def perform_uniform_scaler(train, test):
 	u_scaler = QuantileTransformer(n_quantiles=100, output_distribution='uniform', random_state=123, copy=True).fit(train)
-    u_train_scaled = pd.DataFrame(u_scaler.transform(train), columns=train.columns.values).set_index([train.index.values])
-    u_test_scaled = pd.DataFrame(u_scaler.transform(test), columns=test.columns.values).set_index([test.index.values])
-
-    return u_scaler, u_train_scaled, u_test_scaled
+	u_train_scaled = pd.DataFrame(u_scaler.transform(train), columns=train.columns.values).set_index([train.index.values])
+	u_test_scaled = pd.DataFrame(u_scaler.transform(test), columns=test.columns.values).set_index([test.index.values])
+	return u_scaler, u_train_scaled, u_test_scaled
 
 # power
 # create scaler object using yeo-johnson method and fit to train
