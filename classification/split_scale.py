@@ -3,10 +3,10 @@ from sklearn.preprocessing import StandardScaler, PowerTransformer, MinMaxScaler
 from sklearn.model_selection import train_test_split
 import numpy as np
 
-def split_my_data(data, train_ratio=.80, seed=123):
+def split_my_data(data, train_size=.80, seed=123):
     '''the function will take a dataframe and returns train and test dataframe split 
     where 80% is in train, and 20% in test. '''
-    return train_test_split(data, train_size = train_ratio, random_state = seed)
+    return train_test_split(data, train_size, random_state)
 
 ## Types of scalers
 
