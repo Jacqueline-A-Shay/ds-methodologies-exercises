@@ -1,6 +1,6 @@
 # ds-methodologies-exercises
 
-# acquire data
+**1. acquire data**
 
 - Codeup: 
 
