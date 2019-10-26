@@ -8,7 +8,7 @@
 >
 > df = pd.DataFrame(get_data_from_mysql()) 
 >
-> # you will be inputing specific SQL query and database (titanic_db or iris_db)
+> you will be inputing specific SQL query and database (titanic_db or iris_db)
 
 - outside of Codeup: pydataset
 
