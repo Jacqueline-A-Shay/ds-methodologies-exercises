@@ -4,9 +4,11 @@
 
 - Codeup: 
 
-> use acquire.py & have env.py in same folder
+> setup: acquire.py, env.py
 >
-> df = pd.DataFrame(get_data_from_mysql()) 
+> import pandas as pd
+>
+> df = pd.DataFrame(acquire.get_data_from_mysql()) 
 >
 > you will be inputing specific SQL query and database (titanic_db or iris_db)
 
