@@ -12,7 +12,9 @@
 >
 > you will be inputing specific SQL query and database (titanic_db or iris_db)
 
-- outside of Codeup: pydataset
+- outside of Codeup: 
+
+> setup: pydataset
 
 > from pydataset import data # obtain datasets
 >
