@@ -28,23 +28,3 @@ def split_my_data(data):
 	from sklearn.model_selection import train_test_split
 	return train_test_split(data, train_size = 0.7, random_state = 123)
 
-def label_encode(train, test):
-	from sklearn.preprocessing import LabelEncoder
-	LE = LabelEncoder()
-	LE.fit(train.species)
-	train['species'] = LE.transform(train[['species']])
-	test['species'] = LE.transform(test[['species']])
-	return LE, train, test
-
-def inv_encode(LE, train, test):
-	from sklearn.preprocessing import LabelEncoder
-	a = LE.inverse_transform(train[['species']])
-	train["species"] = a
-	b =  LE.inverse_transform(test[['species']])
-	test["species"] = b
-	return train, test
-
-def prep_iris(df):
-	df = df.pipe(process_col_name).pipe(split_my_data).pipe(label_encode)
-	return df
-

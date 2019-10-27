@@ -11,6 +11,9 @@ import acquire
 
 import warnings
 warnings.filterwarnings("ignore")
+# query = '''
+    # SELECT * FROM passengers;
+    # '''
 
 def process_data(df):
 	df.drop(columns=['passenger_id','embarked','deck'], inplace=True)
