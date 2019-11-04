@@ -5,6 +5,12 @@ import env
 def get_db_url(db):
     return f'mysql+pymysql://{env.user}:{env.password}@{env.host}/{db}'
 
+def get_connection(db, user=env.user, host=env.host, password=env.password):
+    return f'mysql+pymysql://{user}:{password}@{host}/{db}'
+
+def get_mall_data():
+    return pd.read_sql('SELECT * FROM customers',get_connection('mall_customers')) 
+
 def get_data_from_mysql():
 
 	query = """
