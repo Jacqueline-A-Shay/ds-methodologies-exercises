@@ -1,14 +1,9 @@
-def acquire(base_url):
-    p = 2
+def acquire():
     import requests
-    import pandas as pd
-    response = requests.get(base_url)
-    sale_data = response.json()
-    sales = pd.DataFrame(sale_data['payload']['sales'])
-    while sale_data['payload']['page'] < 183:
-        response = requests.get(base_url + 'page =' + str(p))
-        sales = pd.concat([sales, pd.DataFrame(sale_data['payload']['sales'])])
-        p += 1
-        if p > sale_data['payload']['max_page']:
-            sales = sales.reset_index()
-            return sales         
+    import pandas as pd    
+    for page in range(1,5):
+        base_url = 'https://python.zach.lol/api/v1/sales'
+        response = requests.get(base_url + '?page=' + str(page))
+        sales = pd.DataFrame()
+        sales = pd.concat([sales, pd.DataFrame(response.json()['payload']['sales'])])
+    return sales 

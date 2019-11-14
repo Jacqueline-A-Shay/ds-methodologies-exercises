@@ -22,6 +22,7 @@ def process_data(df):
 	return df, train, test
 
 def impute(train, test, my_strategy, column_list):
+    from sklearn.impute import SimpleImputer
 	imputer = SimpleImputer(strategy=my_strategy)
 	train[column_list] = imputer.fit_transform(train[column_list])
 	test[column_list] = imputer.transform(test[column_list])
