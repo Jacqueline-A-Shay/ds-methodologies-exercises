@@ -76,7 +76,7 @@ def get_sale_data(use_cache=True):
     df.to_csv('sales.csv', index=False)
     return df
 
-def get_all_data():
+def get_all_data(use_cache=True):
     sales = get_sale_data()
     items = get_item_data()
     stores = get_store_data()
