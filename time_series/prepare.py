@@ -20,6 +20,19 @@ import acquire
 import prepare 
 import summarize
 
+# normally in prep stage
+# set target col
+# target_vars = ['sales_total']
+# df = df[target_vars].resample('D').sum()
+# y = df['sales_total']
+# X = df.index
+
+# 
+def prep_data(df: pd.DataFrame) -> pd.DataFrame:
+    return (df.assign(ds=pd.to_datetime(df.Month_Invoiced)).sort_values('ds')
+            .assign(y=df.Amount)\
+            .groupby(['ds'])['y'].sum().reset_index().set_index('ds'))
+
 def prep_store_data(df):
     import pandas as pd
     # parse the date column and set it as the index
