@@ -7,7 +7,7 @@ from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 
 import pandas as pd
-import acquire
+import acquire_codeup_blog
 
 def basic_clean(string):
     """
@@ -69,7 +69,7 @@ def prep_articles(df):
     return df
 
 def prep_blog_posts():
-    df = acquire.get_blog_posts()
+    df = acquire_codeup_blog.get_blog_posts()
     return prep_articles(df)
 
 def prep_news_articles():
@@ -84,4 +84,3 @@ def prep_corpus():
     news_df["source"] = "InShorts News"
 
     return blog_df, news_df
-© 2019 GitHub, Inc.

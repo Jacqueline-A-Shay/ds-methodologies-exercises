@@ -15,7 +15,7 @@ def get_blog_posts():
 
 def make_dictionary_from_article(url): 
     # Set header and user agent to increase likelihood that your request get the response you want
-    headers = {'user-agent': 'Codeup Bayes Instructor Example'}
+    headers = {'user-agent': 'JQ'}
 
     # This is the actual HTTP GET request that python will send across the internet
     response = get(url, headers=headers)
