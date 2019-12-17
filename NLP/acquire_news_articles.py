@@ -14,7 +14,7 @@ def get_news_articles():
         return make_new_request()
 
 def get_articles_from_topic(url):
-    headers = {'user-agent': 'Codeup Bayes Instructor Example'}
+    headers = {'user-agent': 'JQ'}
     response = get(url, headers=headers)
     soup = BeautifulSoup(response.content, 'html.parser')
 

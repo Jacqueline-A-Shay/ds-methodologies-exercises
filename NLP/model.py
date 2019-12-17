@@ -27,7 +27,9 @@ import acquire
 # From the Series we can extract the value_counts, which is our raw count
 # for term frequency. Once we have the raw counts, we can calculate the
 # other measures.
-def freq(df):
+def clean(text: str) -> List[str]:
+
+def freq(df, col_list):
 	"""
 	calculate raw count, frequency, augmented frequency
 	- Raw Count: count of the number of occurances of each word
@@ -36,7 +38,59 @@ def freq(df):
 		This can help prevent bias towards larger documents.
 
 	"""
+	# clean up the text
+	document = df[col].lower().replace(',', '').replace('.', '')
+	# transform into a series
+	words = pd.Series(document.split())
 	freq_calc = (pd.DataFrame({'raw_count': words.value_counts()})
 			.assign(frequency=lambda df: df.raw_count / df.raw_count.sum())
 			.assign(augmented_frequency=lambda df: df.frequency / df.frequency.max()))
 	return freq_calc
+
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf = TfidfVectorizer()
+tfidfs = tfidf.fit_transform(documents.values())
+features_df = pd.DataFrame(tfidfs.todense(), columns=tfidf.get_feature_names())
+features_df.head()
+
+
+# Model eval
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, accuracy_score
+
+df = pd.read_csv('./data/spam_clean.csv')
+df.head()
+
+tfidf = TfidfVectorizer()
+X = tfidf.fit_transform(df.text)
+y = df.label
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=.2)
+
+train = pd.DataFrame(dict(actual=y_train))
+test = pd.DataFrame(dict(actual=y_test))
+
+lm = LogisticRegression().fit(X_train, y_train)
+
+train['predicted'] = lm.predict(X_train)
+test['predicted'] = lm.predict(X_test)
+
+
+# print train pred result
+print('Accuracy: {:.2%}'.format(accuracy_score(train.actual, train.predicted)))
+print('---')
+print('Confusion Matrix')
+print(pd.crosstab(train.predicted, train.actual))
+print('---')
+print(classification_report(train.actual, train.predicted))
+
+# print test pred result
+print('Accuracy: {:.2%}'.format(accuracy_score(test.actual, test.predicted)))
+print('---')
+print('Confusion Matrix')
+print(pd.crosstab(test.predicted, test.actual))
+print('---')
+print(classification_report(test.actual, test.predicted))

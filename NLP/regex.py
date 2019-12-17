@@ -11,3 +11,5 @@ def show_all_matches(regexes, subject, re_length=6):
         if len(matches) > 8:
             matches = matches[:8] + ['...']
         print(fmt.format(regexp, matches))
+
+

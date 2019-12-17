@@ -4,6 +4,10 @@ from bs4 import BeautifulSoup
 import os
 import pandas as pd
 
+# project specific imports
+from acquire_codeup_blog import get_blog_posts
+from acquire_news_articles import get_news_articles
+
 
 def get_news_articles():
 	# store into local csv file or make a new request if file not exist
@@ -71,3 +75,5 @@ def make_new_request():
     df.to_csv('inshorts_news_articles.csv') 
 
     return df
+
+ 
